@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 School Assistant</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: #ecf0f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .assistant-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 420px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 90%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            color: white;
+        }
+        .btn-speak { background: #3498db; }
+        .btn-submit { background: #2ecc71; }
+        .btn-google { background: #f39c12; }
+        #status { margin-top: 10px; font-size: 14px; color: green; }
+        #response {
+            margin-top: 15px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            min-height: 50px;
+            text-align: left;
+        }
+        canvas {
+            margin: 15px auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="assistant-box">
+        <h2>🤖 School Assistant</h2>
+        <input type="text" id="question" placeholder="Ask me anything...">
+        <br>
+        <button class="btn-speak">🎤 Hold to Speak</button>
+        <button class="btn-submit">💡 Submit Text</button>
+        <canvas id="visualizer" width="200" height="60"></canvas>
+        <div id="status">✅ Ready</div>
+        <div id="response"></div>
+        <button class="btn-google">🌐 Search on Google</button>
+    </div>
+
+    <script>
+        // Dummy animation for frequency bars
+        const canvas = document.getElementById("visualizer");
+        const ctx = canvas.getContext("2d");
+
+        function animateBars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < 6; i++) {
+                let offset = 20 * Math.sin(Date.now()/300 + i);
+                ctx.beginPath();
+                ctx.moveTo(30*i+20, 30-offset);
+                ctx.lineTo(30*i+20, 30+offset);
+                ctx.lineWidth = 5;
+                ctx.strokeStyle = i % 2 === 0 ? "#3498db" : "#2ecc71";
+                ctx.stroke();
+            }
+            requestAnimationFrame(animateBars);
+        }
+        animateBars();
+    </script>
+
+</body>
+</html>
